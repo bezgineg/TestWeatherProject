@@ -15,6 +15,12 @@
 		A3C9D9D8268875A200E2578D /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9D9D7268875A200E2578D /* WeatherTableViewCell.swift */; };
 		A3C9D9DC2688766100E2578D /* UIView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9D9DB2688766100E2578D /* UIView Extension.swift */; };
 		A3C9D9E02688780800E2578D /* CityStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9D9DF2688780700E2578D /* CityStorage.swift */; };
+		A3C9D9E72688951A00E2578D /* WeatherDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9D9E62688951A00E2578D /* WeatherDataProvider.swift */; };
+		A3C9D9EB2688952A00E2578D /* WeatherDataProviderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9D9EA2688952A00E2578D /* WeatherDataProviderError.swift */; };
+		A3C9D9EF268896B500E2578D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9D9EE268896B500E2578D /* Constants.swift */; };
+		A3C9D9F42688A1BD00E2578D /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9D9F32688A1BD00E2578D /* WeatherData.swift */; };
+		A3C9D9F72688A48700E2578D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9D9F62688A48700E2578D /* Weather.swift */; };
+		A3C9D9FB2688AC0900E2578D /* WeatherStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9D9FA2688AC0900E2578D /* WeatherStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +34,12 @@
 		A3C9D9D7268875A200E2578D /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
 		A3C9D9DB2688766100E2578D /* UIView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView Extension.swift"; sourceTree = "<group>"; };
 		A3C9D9DF2688780700E2578D /* CityStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityStorage.swift; sourceTree = "<group>"; };
+		A3C9D9E62688951A00E2578D /* WeatherDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataProvider.swift; sourceTree = "<group>"; };
+		A3C9D9EA2688952A00E2578D /* WeatherDataProviderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataProviderError.swift; sourceTree = "<group>"; };
+		A3C9D9EE268896B500E2578D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A3C9D9F32688A1BD00E2578D /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		A3C9D9F62688A48700E2578D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		A3C9D9FA2688AC0900E2578D /* WeatherStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +72,9 @@
 		A3C9D9BA268872C800E2578D /* TestWeatherProject */ = {
 			isa = PBXGroup;
 			children = (
+				A3C9D9F22688A1AF00E2578D /* Models */,
+				A3C9D9ED2688969200E2578D /* Constants */,
+				A3C9D9E4268894EE00E2578D /* Managers */,
 				A3C9D9DE268877F700E2578D /* Storage */,
 				A3C9D9DA2688765300E2578D /* Helpers */,
 				A3C9D9C9268872CF00E2578D /* Info.plist */,
@@ -101,8 +116,43 @@
 			isa = PBXGroup;
 			children = (
 				A3C9D9DF2688780700E2578D /* CityStorage.swift */,
+				A3C9D9FA2688AC0900E2578D /* WeatherStorage.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		A3C9D9E4268894EE00E2578D /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				A3C9D9E52688950600E2578D /* WeatherDataProvider */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		A3C9D9E52688950600E2578D /* WeatherDataProvider */ = {
+			isa = PBXGroup;
+			children = (
+				A3C9D9E62688951A00E2578D /* WeatherDataProvider.swift */,
+				A3C9D9EA2688952A00E2578D /* WeatherDataProviderError.swift */,
+			);
+			path = WeatherDataProvider;
+			sourceTree = "<group>";
+		};
+		A3C9D9ED2688969200E2578D /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				A3C9D9EE268896B500E2578D /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		A3C9D9F22688A1AF00E2578D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A3C9D9F32688A1BD00E2578D /* WeatherData.swift */,
+				A3C9D9F62688A48700E2578D /* Weather.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,11 +225,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3C9D9D8268875A200E2578D /* WeatherTableViewCell.swift in Sources */,
+				A3C9D9EB2688952A00E2578D /* WeatherDataProviderError.swift in Sources */,
 				A3C9D9DC2688766100E2578D /* UIView Extension.swift in Sources */,
 				A3C9D9C0268872C800E2578D /* WeatherViewController.swift in Sources */,
+				A3C9D9FB2688AC0900E2578D /* WeatherStorage.swift in Sources */,
+				A3C9D9F42688A1BD00E2578D /* WeatherData.swift in Sources */,
+				A3C9D9E72688951A00E2578D /* WeatherDataProvider.swift in Sources */,
 				A3C9D9BC268872C800E2578D /* AppDelegate.swift in Sources */,
 				A3C9D9E02688780800E2578D /* CityStorage.swift in Sources */,
 				A3C9D9BE268872C800E2578D /* SceneDelegate.swift in Sources */,
+				A3C9D9F72688A48700E2578D /* Weather.swift in Sources */,
+				A3C9D9EF268896B500E2578D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +384,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.netology.TestWeatherProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -347,7 +403,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.netology.TestWeatherProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

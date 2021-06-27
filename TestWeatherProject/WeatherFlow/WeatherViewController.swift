@@ -3,17 +3,38 @@ import UIKit
 
 class WeatherViewController: UIViewController {
     
+    let weatherDataProvider: WeatherDataProvider
+    
     private let weatherTableView = UITableView(frame: .zero, style: .plain)
     
     private var weatherReuseID: String {
         return String(describing: WeatherTableViewCell.self)
     }
     
+    init(weatherDataProvider: WeatherDataProvider) {
+        self.weatherDataProvider = weatherDataProvider
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadWeather()
         setupLayout()
         setupTableView()
+    }
+    
+    private func loadWeather() {
+        for city in CityStorage.cities {
+            weatherDataProvider.getWeather(city: city)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.weatherTableView.reloadData()
+        }
     }
     
     private func setupTableView() {
@@ -49,15 +70,15 @@ extension WeatherViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CityStorage.cities.count
+        return WeatherStorage.weather.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let weatherCell: WeatherTableViewCell = tableView.dequeueReusableCell(withIdentifier: weatherReuseID, for: indexPath) as! WeatherTableViewCell
         
-        let city = CityStorage.cities[indexPath.row]
+        let weather = WeatherStorage.weather[indexPath.row]
         
-        weatherCell.configure(with: city)
+        weatherCell.configure(with: weather)
         
         return weatherCell
     }
