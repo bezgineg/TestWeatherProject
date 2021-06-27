@@ -7,6 +7,7 @@ class WeatherTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = .black
+        label.text = "Город"
         return label
     }()
     
@@ -14,13 +15,15 @@ class WeatherTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = .black
+        label.text = "0°C"
         return label
     }()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .black
+        label.textColor = .gray
+        label.text = "погода"
         return label
     }()
 
@@ -37,8 +40,8 @@ class WeatherTableViewCell: UITableViewCell {
     
     func configure(with weather: Weather) {
         cityLabel.text = weather.name
-        temperatureLabel.text = "\(weather.temperature)"
-        descriptionLabel.text = weather.decription.capitalized
+        temperatureLabel.text = "\(weather.temperature)°C"
+        descriptionLabel.text = weather.decription
     }
     
     private func setupLayout() {

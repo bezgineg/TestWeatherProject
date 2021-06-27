@@ -1,6 +1,6 @@
 import Foundation
 
-struct Weather {
+struct Weather: Equatable {
     let name: String
     let temperature: Int
     let condition: String

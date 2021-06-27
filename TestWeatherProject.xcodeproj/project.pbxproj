@@ -21,6 +21,9 @@
 		A3C9D9F42688A1BD00E2578D /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9D9F32688A1BD00E2578D /* WeatherData.swift */; };
 		A3C9D9F72688A48700E2578D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9D9F62688A48700E2578D /* Weather.swift */; };
 		A3C9D9FB2688AC0900E2578D /* WeatherStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9D9FA2688AC0900E2578D /* WeatherStorage.swift */; };
+		A3C9DA022688DCDD00E2578D /* WeatherDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9DA012688DCDD00E2578D /* WeatherDetailsViewController.swift */; };
+		A3C9DA062688DD5300E2578D /* WeatherDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9DA052688DD5300E2578D /* WeatherDetailsView.swift */; };
+		A3C9DA092688E97600E2578D /* FilteredWeatherStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9DA082688E97600E2578D /* FilteredWeatherStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		A3C9D9F32688A1BD00E2578D /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		A3C9D9F62688A48700E2578D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		A3C9D9FA2688AC0900E2578D /* WeatherStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStorage.swift; sourceTree = "<group>"; };
+		A3C9DA012688DCDD00E2578D /* WeatherDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailsViewController.swift; sourceTree = "<group>"; };
+		A3C9DA052688DD5300E2578D /* WeatherDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailsView.swift; sourceTree = "<group>"; };
+		A3C9DA082688E97600E2578D /* FilteredWeatherStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredWeatherStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,7 @@
 				A3C9D9C9268872CF00E2578D /* Info.plist */,
 				A3C9D9D22688736600E2578D /* SystemFiles */,
 				A3C9D9D32688737C00E2578D /* WeatherFlow */,
+				A3C9DA002688DCAF00E2578D /* WeatherDetailsFlow */,
 			);
 			path = TestWeatherProject;
 			sourceTree = "<group>";
@@ -117,6 +124,7 @@
 			children = (
 				A3C9D9DF2688780700E2578D /* CityStorage.swift */,
 				A3C9D9FA2688AC0900E2578D /* WeatherStorage.swift */,
+				A3C9DA082688E97600E2578D /* FilteredWeatherStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -153,6 +161,15 @@
 				A3C9D9F62688A48700E2578D /* Weather.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		A3C9DA002688DCAF00E2578D /* WeatherDetailsFlow */ = {
+			isa = PBXGroup;
+			children = (
+				A3C9DA012688DCDD00E2578D /* WeatherDetailsViewController.swift */,
+				A3C9DA052688DD5300E2578D /* WeatherDetailsView.swift */,
+			);
+			path = WeatherDetailsFlow;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +241,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3C9DA062688DD5300E2578D /* WeatherDetailsView.swift in Sources */,
+				A3C9DA022688DCDD00E2578D /* WeatherDetailsViewController.swift in Sources */,
 				A3C9D9D8268875A200E2578D /* WeatherTableViewCell.swift in Sources */,
 				A3C9D9EB2688952A00E2578D /* WeatherDataProviderError.swift in Sources */,
 				A3C9D9DC2688766100E2578D /* UIView Extension.swift in Sources */,
@@ -234,6 +253,7 @@
 				A3C9D9BC268872C800E2578D /* AppDelegate.swift in Sources */,
 				A3C9D9E02688780800E2578D /* CityStorage.swift in Sources */,
 				A3C9D9BE268872C800E2578D /* SceneDelegate.swift in Sources */,
+				A3C9DA092688E97600E2578D /* FilteredWeatherStorage.swift in Sources */,
 				A3C9D9F72688A48700E2578D /* Weather.swift in Sources */,
 				A3C9D9EF268896B500E2578D /* Constants.swift in Sources */,
 			);

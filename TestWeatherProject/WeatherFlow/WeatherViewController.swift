@@ -7,6 +7,17 @@ class WeatherViewController: UIViewController {
     
     private let weatherTableView = UITableView(frame: .zero, style: .plain)
     
+    private let searchController = UISearchController(searchResultsController: nil)
+    
+    var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    
+    var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
+    
     private var weatherReuseID: String {
         return String(describing: WeatherTableViewCell.self)
     }
@@ -26,13 +37,23 @@ class WeatherViewController: UIViewController {
         loadWeather()
         setupLayout()
         setupTableView()
+        setupSearchController()
+    }
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Найти"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     private func loadWeather() {
         for city in CityStorage.cities {
             weatherDataProvider.getWeather(city: city)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.weatherTableView.reloadData()
         }
     }
@@ -60,7 +81,16 @@ class WeatherViewController: UIViewController {
 
 extension WeatherViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        
+        if isFiltering {
+            let weather = FilteredWeatherStorage.weather[indexPath.row]
+            let weatherDetailsViewController = WeatherDetailsViewController(weather: weather)
+            navigationController?.pushViewController(weatherDetailsViewController, animated: true)
+        } else {
+            let weather = WeatherStorage.weather[indexPath.row]
+            let weatherDetailsViewController = WeatherDetailsViewController(weather: weather)
+            navigationController?.pushViewController(weatherDetailsViewController, animated: true)
+        }
     }
 }
 
@@ -70,19 +100,68 @@ extension WeatherViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return WeatherStorage.weather.count
+        if isFiltering {
+            return FilteredWeatherStorage.weather.count
+        } else {
+            return WeatherStorage.weather.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let weatherCell: WeatherTableViewCell = tableView.dequeueReusableCell(withIdentifier: weatherReuseID, for: indexPath) as! WeatherTableViewCell
         
-        let weather = WeatherStorage.weather[indexPath.row]
-        
-        weatherCell.configure(with: weather)
-        
-        return weatherCell
+        if isFiltering {
+            let weather = FilteredWeatherStorage.weather[indexPath.row]
+            weatherCell.configure(with: weather)
+            return weatherCell
+        } else {
+            let weather = WeatherStorage.weather[indexPath.row]
+            weatherCell.configure(with: weather)
+            return weatherCell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let removeAction = UIContextualAction(style: .destructive, title: "Удалить") {_,_,_ in
+            
+            let city = WeatherStorage.weather[indexPath.row]
+            
+            if let index = WeatherStorage.weather.firstIndex(of: city) {
+                if self.isFiltering {
+                    FilteredWeatherStorage.weather.remove(at: index)
+                    self.weatherTableView.performBatchUpdates {
+                        self.weatherTableView.deleteRows(at: [indexPath], with: .fade)
+                    }
+                } else {
+                    WeatherStorage.weather.remove(at: index)
+                    self.weatherTableView.performBatchUpdates {
+                        self.weatherTableView.deleteRows(at: [indexPath], with: .fade)
+                    }
+                }
+            }
+             
+            //self.weatherTableView.reloadData()
+        }
+        return UISwipeActionsConfiguration(actions: [removeAction])
     }
     
     
 }
+
+extension WeatherViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        filterWeatherStorage(with: text)
+    }
+    
+    private func filterWeatherStorage(with text: String) {
+        FilteredWeatherStorage.weather = WeatherStorage.weather.filter {
+            $0.name.contains(text)
+        }
+        weatherTableView.reloadData()
+    }
+}
+
+
 
