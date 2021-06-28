@@ -53,35 +53,37 @@ class WeatherDataProvider {
         }
     }
     
-    func getWeather(city: String) {
-        getCoordinates(city: city) { result in
-            switch result {
-            case .success(let location):
-                let lat = String(location.latitude)
-                let lon = String(location.longitude)
-                self.fetchWeather(lat: lat, lon: lon) { loadingResult in
-                    switch loadingResult {
-                    case .success(let data):
-                        let jsonDecoder = JSONDecoder()
-                        if let dictionary = try? jsonDecoder.decode(WeatherData.self, from: data) {
-                            let weather = Weather(name: city, temperature: dictionary.fact.temp, feelsLike: dictionary.fact.feelsLike, precType: dictionary.fact.precType, windSpeed: dictionary.fact.windSpeed, pressureMm: dictionary.fact.pressureMm, humidity: dictionary.fact.humidity, condition: dictionary.fact.condition)
-                            WeatherStorage.weather.append(weather)
-                        }
-                    case .failure(let error):
-                        switch error {
-                        case .networkConnectionProblem:
-                            let title = "Проверьте интернет соединение"
-                            let message = "Соединение с интернетом не установлено. Не удалось загрузить данные о погоде"
-                            self.delegate?.showNetworkAlert(with: title, message: message)
+    func getWeather(cities: [String], completion: @escaping (Int, Weather) -> Void) {
+        for (index, city) in cities.enumerated() {
+            getCoordinates(city: city) { result in
+                switch result {
+                case .success(let location):
+                    let lat = String(location.latitude)
+                    let lon = String(location.longitude)
+                    self.fetchWeather(lat: lat, lon: lon) { loadingResult in
+                        switch loadingResult {
+                        case .success(let data):
+                            let jsonDecoder = JSONDecoder()
+                            if let dictionary = try? jsonDecoder.decode(WeatherData.self, from: data) {
+                                let weather = Weather(name: city, temperature: dictionary.fact.temp, feelsLike: dictionary.fact.feelsLike, precType: dictionary.fact.precType, windSpeed: dictionary.fact.windSpeed, pressureMm: dictionary.fact.pressureMm, humidity: dictionary.fact.humidity, condition: dictionary.fact.condition)
+                                completion(index, weather)
+                            }
+                        case .failure(let error):
+                            switch error {
+                            case .networkConnectionProblem:
+                                let title = "Проверьте интернет соединение"
+                                let message = "Соединение с интернетом не установлено. Не удалось загрузить данные о погоде"
+                                self.delegate?.showNetworkAlert(with: title, message: message)
+                            }
                         }
                     }
-                }
-            case .failure(let error):
-                switch error {
-                case .networkConnectionProblem:
-                    let title = "Проверьте интернет соединение"
-                    let message = "Соединение с интернетом не установлено. Не удалось загрузить данные о погоде"
-                    self.delegate?.showNetworkAlert(with: title, message: message)
+                case .failure(let error):
+                    switch error {
+                    case .networkConnectionProblem:
+                        let title = "Проверьте интернет соединение"
+                        let message = "Соединение с интернетом не установлено. Не удалось загрузить данные о погоде"
+                        self.delegate?.showNetworkAlert(with: title, message: message)
+                    }
                 }
             }
         }

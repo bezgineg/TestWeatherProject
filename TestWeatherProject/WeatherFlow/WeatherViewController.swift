@@ -2,19 +2,19 @@
 import UIKit
 
 class WeatherViewController: UIViewController {
-    
+
     let weatherDataProvider: WeatherDataProvider
     
     private let weatherTableView = UITableView(frame: .zero, style: .plain)
     
     private let searchController = UISearchController(searchResultsController: nil)
     
-    var searchBarIsEmpty: Bool {
+    private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty
     }
     
-    var isFiltering: Bool {
+    private var isFiltering: Bool {
         return searchController.isActive && !searchBarIsEmpty
     }
     
@@ -46,17 +46,24 @@ class WeatherViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Найти"
         navigationItem.searchController = searchController
-        definesPresentationContext = true
         navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
     }
     
     private func loadWeather() {
-        for city in CityStorage.cities {
-            weatherDataProvider.getWeather(city: city)
+        if WeatherStorage.weather.isEmpty {
+            WeatherStorage.weather = Array(repeating: Weather(), count: CityStorage.cities.count)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.weatherTableView.reloadData()
+        weatherDataProvider.getWeather(cities: CityStorage.cities) { index, weather in
+            WeatherStorage.weather[index] = weather
+            
+            DispatchQueue.main.async {
+                self.weatherTableView.reloadData()
+            }
+           
         }
+        
+        
     }
     
     private func setupTableView() {
