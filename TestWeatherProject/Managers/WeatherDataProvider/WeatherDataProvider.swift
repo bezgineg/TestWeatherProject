@@ -2,7 +2,13 @@
 import Foundation
 import CoreLocation
 
+protocol WeatherDataProviderDelegate: class {
+    func showNetworkAlert(with title: String, message: String)
+}
+
 class WeatherDataProvider {
+    
+    weak var delegate: WeatherDataProviderDelegate?
  
     func fetchWeather(lat: String, lon: String, completion: @escaping (Result<Data,WeatherDataProviderError>) -> Void) {
         
@@ -61,12 +67,22 @@ class WeatherDataProvider {
                             let weather = Weather(name: city, temperature: dictionary.fact.temp, condition: dictionary.fact.condition)
                             WeatherStorage.weather.append(weather)
                         }
-                    case .failure(_):
-                        print("Error")
+                    case .failure(let error):
+                        switch error {
+                        case .networkConnectionProblem:
+                            let title = "Проверьте интернет соединение"
+                            let message = "Соединение с интернетом не установлено. Не удалось загрузить данные о погоде"
+                            self.delegate?.showNetworkAlert(with: title, message: message)
+                        }
                     }
                 }
-            case .failure(_):
-                print("")
+            case .failure(let error):
+                switch error {
+                case .networkConnectionProblem:
+                    let title = "Проверьте интернет соединение"
+                    let message = "Соединение с интернетом не установлено. Не удалось загрузить данные о погоде"
+                    self.delegate?.showNetworkAlert(with: title, message: message)
+                }
             }
         }
     }
