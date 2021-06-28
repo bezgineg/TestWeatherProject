@@ -22,6 +22,8 @@ class WeatherDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        navigationItem.title = weather.name
         weatherDetailsView.configure(with: weather)
         setupLayout()
 

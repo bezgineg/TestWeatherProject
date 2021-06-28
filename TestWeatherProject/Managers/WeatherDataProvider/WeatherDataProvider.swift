@@ -64,7 +64,7 @@ class WeatherDataProvider {
                     case .success(let data):
                         let jsonDecoder = JSONDecoder()
                         if let dictionary = try? jsonDecoder.decode(WeatherData.self, from: data) {
-                            let weather = Weather(name: city, temperature: dictionary.fact.temp, condition: dictionary.fact.condition)
+                            let weather = Weather(name: city, temperature: dictionary.fact.temp, feelsLike: dictionary.fact.feelsLike, precType: dictionary.fact.precType, windSpeed: dictionary.fact.windSpeed, pressureMm: dictionary.fact.pressureMm, humidity: dictionary.fact.humidity, condition: dictionary.fact.condition)
                             WeatherStorage.weather.append(weather)
                         }
                     case .failure(let error):

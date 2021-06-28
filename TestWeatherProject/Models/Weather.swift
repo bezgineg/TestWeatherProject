@@ -3,6 +3,11 @@ import Foundation
 struct Weather: Equatable {
     let name: String
     let temperature: Int
+    let feelsLike: Int
+    let precType: Int
+    let windSpeed: Double
+    let pressureMm: Int
+    let humidity: Int
     let condition: String
     
     var decription: String {

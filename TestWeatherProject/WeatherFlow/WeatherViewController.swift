@@ -34,6 +34,7 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        weatherDataProvider.delegate = self
         loadWeather()
         setupLayout()
         setupTableView()
@@ -140,8 +141,6 @@ extension WeatherViewController: UITableViewDataSource {
                     }
                 }
             }
-             
-            //self.weatherTableView.reloadData()
         }
         return UISwipeActionsConfiguration(actions: [removeAction])
     }
@@ -160,6 +159,15 @@ extension WeatherViewController: UISearchResultsUpdating {
             $0.name.contains(text)
         }
         weatherTableView.reloadData()
+    }
+}
+
+extension WeatherViewController: WeatherDataProviderDelegate {
+    func showNetworkAlert(with title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        navigationController?.present(alertController, animated: false, completion: nil)
     }
 }
 
