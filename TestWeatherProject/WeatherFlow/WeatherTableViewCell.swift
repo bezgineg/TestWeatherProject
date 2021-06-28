@@ -60,6 +60,4 @@ class WeatherTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate(constraints)
     }
-
-
 }

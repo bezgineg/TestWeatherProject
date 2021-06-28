@@ -21,7 +21,6 @@ class WeatherDataProvider {
         
         var request = URLRequest(url: url)
         request.addValue("\(Constants.apiKey)", forHTTPHeaderField: "X-Yandex-API-Key")
-        request.httpMethod = "GET"
         
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             

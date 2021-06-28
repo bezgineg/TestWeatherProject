@@ -60,10 +60,7 @@ class WeatherViewController: UIViewController {
             DispatchQueue.main.async {
                 self.weatherTableView.reloadData()
             }
-           
         }
-        
-        
     }
     
     private func setupTableView() {
@@ -151,8 +148,6 @@ extension WeatherViewController: UITableViewDataSource {
         }
         return UISwipeActionsConfiguration(actions: [removeAction])
     }
-    
-    
 }
 
 extension WeatherViewController: UISearchResultsUpdating {
