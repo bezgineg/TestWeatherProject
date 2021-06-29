@@ -145,34 +145,34 @@ class WeatherDetailsView: UIView {
             descriptionLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 15),
             descriptionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            feelslikeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
+            feelslikeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
             feelslikeLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 25),
             
-            feelslikeValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
+            feelslikeValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
             feelslikeValueLabel.centerYAnchor.constraint(equalTo: feelslikeLabel.centerYAnchor),
             
-            precipitationLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
+            precipitationLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
             precipitationLabel.topAnchor.constraint(equalTo: feelslikeLabel.bottomAnchor, constant: 25),
             
-            precipitationValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
+            precipitationValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
             precipitationValueLabel.centerYAnchor.constraint(equalTo: precipitationLabel.centerYAnchor),
             
-            humidityLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
+            humidityLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
             humidityLabel.topAnchor.constraint(equalTo: precipitationLabel.bottomAnchor, constant: 25),
             
-            humidityValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
+            humidityValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
             humidityValueLabel.centerYAnchor.constraint(equalTo: humidityLabel.centerYAnchor),
             
-            pressureLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
+            pressureLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
             pressureLabel.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 25),
             
-            pressureValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
-            pressureValueLabel.topAnchor.constraint(equalTo: humidityValueLabel.bottomAnchor, constant: 15),
+            pressureValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
+            pressureValueLabel.centerYAnchor.constraint(equalTo: pressureValueLabel.centerYAnchor, constant: 15),
             
-            windspeedLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
+            windspeedLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
             windspeedLabel.topAnchor.constraint(equalTo: pressureLabel.bottomAnchor, constant: 25),
             
-            windspeedValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
+            windspeedValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
             windspeedValueLabel.centerYAnchor.constraint(equalTo: windspeedLabel.centerYAnchor)
         ]
         
