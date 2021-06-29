@@ -110,7 +110,6 @@ extension WeatherViewController: UITableViewDataSource {
         } else {
             return WeatherStorage.weather.count
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

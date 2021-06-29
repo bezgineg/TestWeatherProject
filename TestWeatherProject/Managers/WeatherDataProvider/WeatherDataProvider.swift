@@ -3,14 +3,17 @@ import Foundation
 import CoreLocation
 
 protocol WeatherDataProviderDelegate: class {
-    func showNetworkAlert(with title: String, message: String)
+    func showNetworkAlert(with title: String,
+                          message: String)
 }
 
 class WeatherDataProvider {
     
     weak var delegate: WeatherDataProviderDelegate?
  
-    func fetchWeather(lat: String, lon: String, completion: @escaping (Result<Data,WeatherDataProviderError>) -> Void) {
+    func fetchWeather(lat: String,
+                      lon: String,
+                      completion: @escaping (Result<Data,WeatherDataProviderError>) -> Void) {
         
         let urlString = "https://api.weather.yandex.ru/v2/forecast?lat=\(lat)&lon=\(lon)&limit=1&hours=false&extra=false"
         
@@ -26,19 +29,18 @@ class WeatherDataProvider {
             
             guard error == nil else {
                 completion(.failure(.networkConnectionProblem))
-                print(error.debugDescription)
                 return
             }
             
             if let data = data {
                 completion(.success(data))
             }
-            
         }
         task.resume()
     }
     
-    func getCoordinates(city: String, completion: @escaping (Result<CLLocationCoordinate2D, WeatherDataProviderError>) -> Void) {
+    func getCoordinates(city: String,
+                        completion: @escaping (Result<CLLocationCoordinate2D, WeatherDataProviderError>) -> Void) {
         CLGeocoder().geocodeAddressString(city) { (placemark, error) in
             if let _ = error {
                 completion(.failure(.networkConnectionProblem))
@@ -52,15 +54,18 @@ class WeatherDataProvider {
         }
     }
     
-    func getWeather(cities: [String], completion: @escaping (Int, Weather) -> Void) {
+    func getWeather(cities: [String],
+                    completion: @escaping (Int, Weather) -> Void) {
         for (index, city) in cities.enumerated() {
             getCoordinates(city: city) { result in
                 switch result {
+                
                 case .success(let location):
                     let lat = String(location.latitude)
                     let lon = String(location.longitude)
                     self.fetchWeather(lat: lat, lon: lon) { loadingResult in
                         switch loadingResult {
+                        
                         case .success(let data):
                             let jsonDecoder = JSONDecoder()
                             if let dictionary = try? jsonDecoder.decode(WeatherData.self, from: data) {
@@ -69,6 +74,7 @@ class WeatherDataProvider {
                             }
                         case .failure(let error):
                             switch error {
+                            
                             case .networkConnectionProblem:
                                 let title = "Проверьте интернет соединение"
                                 let message = "Соединение с интернетом не установлено. Не удалось загрузить данные о погоде"
@@ -78,6 +84,7 @@ class WeatherDataProvider {
                     }
                 case .failure(let error):
                     switch error {
+                    
                     case .networkConnectionProblem:
                         let title = "Проверьте интернет соединение"
                         let message = "Соединение с интернетом не установлено. Не удалось загрузить данные о погоде"

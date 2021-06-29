@@ -25,7 +25,6 @@ class WeatherDetailsViewController: UIViewController {
         navigationItem.title = weather.name
         weatherDetailsView.configure(with: weather)
         setupLayout()
-
     }
     
     private func setupLayout() {
