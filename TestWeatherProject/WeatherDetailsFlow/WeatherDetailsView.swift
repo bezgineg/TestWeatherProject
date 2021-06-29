@@ -167,7 +167,7 @@ class WeatherDetailsView: UIView {
             pressureLabel.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 25),
             
             pressureValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
-            pressureValueLabel.centerYAnchor.constraint(equalTo: pressureValueLabel.centerYAnchor, constant: 15),
+            pressureValueLabel.centerYAnchor.constraint(equalTo: pressureLabel.centerYAnchor),
             
             windspeedLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
             windspeedLabel.topAnchor.constraint(equalTo: pressureLabel.bottomAnchor, constant: 25),
