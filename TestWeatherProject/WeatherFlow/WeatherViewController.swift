@@ -2,9 +2,11 @@
 import UIKit
 
 class WeatherViewController: UIViewController {
-
+    
+    //MARK: - Public Properties
     let weatherDataProvider: WeatherDataProvider
     
+    //MARK: - Private Properties
     private let weatherTableView = UITableView(frame: .zero, style: .plain)
     
     private let searchController = UISearchController(searchResultsController: nil)
@@ -22,6 +24,7 @@ class WeatherViewController: UIViewController {
         return String(describing: WeatherTableViewCell.self)
     }
     
+    //MARK: - Initializers
     init(weatherDataProvider: WeatherDataProvider) {
         self.weatherDataProvider = weatherDataProvider
         super.init(nibName: nil, bundle: nil)
@@ -31,6 +34,7 @@ class WeatherViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +48,7 @@ class WeatherViewController: UIViewController {
         view = weatherTableView
     }
     
+    //MARK: - Private Methods
     private func appointDelegates() {
         weatherDataProvider.delegate = self
     }
@@ -94,9 +99,6 @@ extension WeatherViewController: UITableViewDelegate {
 
 // MARK: - UITableViewDataSource
 extension WeatherViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {

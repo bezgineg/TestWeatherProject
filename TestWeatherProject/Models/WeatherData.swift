@@ -2,10 +2,12 @@
 import Foundation
 
 struct WeatherData: Decodable {
+    //MARK: - Public Properties
     let fact: Fact
 }
 
 struct Fact: Decodable {
+    //MARK: - Public Properties
     let temp: Int
     let condition: String
     let feelsLike: Int

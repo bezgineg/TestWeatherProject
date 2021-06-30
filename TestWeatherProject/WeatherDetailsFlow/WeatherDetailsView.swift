@@ -3,6 +3,7 @@ import UIKit
 
 class WeatherDetailsView: UIView {
     
+    //MARK: - Private Properties
     private let temperatureLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30, weight: .regular)
@@ -92,6 +93,7 @@ class WeatherDetailsView: UIView {
         return label
     }()
     
+    //MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -102,6 +104,7 @@ class WeatherDetailsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    //MARK: - Public Methods
     func configure(with weather: Weather) {
         temperatureLabel.text = "\(weather.temperature)°C"
         descriptionLabel.text = weather.decription
@@ -113,6 +116,7 @@ class WeatherDetailsView: UIView {
         setupBackgroundColor(with: weather.temperature)
     }
     
+    //MARK: - Private Methods
     private func configurePrecipitation(with value: Int) -> String {
         switch value {
         case 0: return "Без осадков"

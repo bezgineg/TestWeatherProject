@@ -3,6 +3,7 @@ import UIKit
 
 class WeatherTableViewCell: UITableViewCell {
     
+    //MARK: - Private Properties
     private let cityLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
@@ -27,6 +28,7 @@ class WeatherTableViewCell: UITableViewCell {
         return label
     }()
 
+    //MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -38,12 +40,14 @@ class WeatherTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Public Methods
     func configure(with weather: Weather) {
         cityLabel.text = weather.name
         temperatureLabel.text = "\(weather.temperature)°C"
         descriptionLabel.text = weather.decription
     }
     
+    //MARK: - Private Methods
     private func setupLayout() {
         addSubviews(cityLabel, temperatureLabel, descriptionLabel)
         

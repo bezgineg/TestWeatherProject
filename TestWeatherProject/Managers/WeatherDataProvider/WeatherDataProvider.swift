@@ -9,10 +9,12 @@ protocol WeatherDataProviderDelegate: class {
 }
 
 class WeatherDataProvider {
-    
+
+    //MARK: - Public Properties
     weak var delegate: WeatherDataProviderDelegate?
  
-    func fetchWeather(lat: String,
+    //MARK: - Public Methods
+    private func fetchWeather(lat: String,
                       lon: String,
                       completion: @escaping (Result<Data,WeatherDataProviderError>) -> Void) {
         
@@ -40,7 +42,8 @@ class WeatherDataProvider {
         task.resume()
     }
     
-    func getCoordinates(city: String,
+    //MARK: - Private Methods
+    private func getCoordinates(city: String,
                         completion: @escaping (Result<CLLocationCoordinate2D, WeatherDataProviderError>) -> Void) {
         CLGeocoder().geocodeAddressString(city) { (placemark, error) in
             if let _ = error {

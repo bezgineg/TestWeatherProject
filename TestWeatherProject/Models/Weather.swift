@@ -1,6 +1,8 @@
 import Foundation
 
 struct Weather: Equatable {
+    
+    //MARK: - Public Properties
     var name: String
     var temperature: Int
     var feelsLike: Int
@@ -9,7 +11,6 @@ struct Weather: Equatable {
     var pressureMm: Int
     var humidity: Int
     var condition: String
-    
     var decription: String {
         switch condition {
         case "clear": return "ясно"
