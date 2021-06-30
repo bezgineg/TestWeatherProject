@@ -9,13 +9,13 @@ class WeatherViewController: UIViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
     
-    private var searchBarIsEmpty: Bool {
+    private var isSearchBarEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty
     }
     
     private var isFiltering: Bool {
-        return searchController.isActive && !searchBarIsEmpty
+        return searchController.isActive && !isSearchBarEmpty
     }
     
     private var weatherReuseID: String {
@@ -34,14 +34,18 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        weatherDataProvider.delegate = self
+        appointDelegates()
         loadWeather()
         setupTableView()
         setupSearchController()
     }
     
     override func loadView() {
-        self.view = weatherTableView
+        view = weatherTableView
+    }
+    
+    private func appointDelegates() {
+        weatherDataProvider.delegate = self
     }
     
     private func setupSearchController() {
@@ -72,6 +76,7 @@ class WeatherViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension WeatherViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -87,6 +92,7 @@ extension WeatherViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension WeatherViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -141,6 +147,7 @@ extension WeatherViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UISearchResultsUpdating
 extension WeatherViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
@@ -155,8 +162,9 @@ extension WeatherViewController: UISearchResultsUpdating {
     }
 }
 
+// MARK: - WeatherDataProviderDelegate
 extension WeatherViewController: WeatherDataProviderDelegate {
-    func showNetworkAlert(with title: String, message: String) {
+    func showNetworkAlert(_ weatherDataProvider: WeatherDataProvider, withTitle title: String, withMessage message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(okAction)

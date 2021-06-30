@@ -3,8 +3,9 @@ import Foundation
 import CoreLocation
 
 protocol WeatherDataProviderDelegate: class {
-    func showNetworkAlert(with title: String,
-                          message: String)
+    func showNetworkAlert(_ weatherDataProvider: WeatherDataProvider,
+                          withTitle title: String,
+                          withMessage message: String)
 }
 
 class WeatherDataProvider {
@@ -79,7 +80,7 @@ class WeatherDataProvider {
                             case .networkConnectionProblem:
                                 let title = "Проверьте интернет соединение"
                                 let message = "Соединение с интернетом не установлено. Не удалось загрузить данные о погоде"
-                                self.delegate?.showNetworkAlert(with: title, message: message)
+                                self.delegate?.showNetworkAlert(self, withTitle: title, withMessage: message)
                             }
                         }
                     }
@@ -89,7 +90,7 @@ class WeatherDataProvider {
                     case .networkConnectionProblem:
                         let title = "Проверьте интернет соединение"
                         let message = "Соединение с интернетом не установлено. Не удалось загрузить данные о погоде"
-                        self.delegate?.showNetworkAlert(with: title, message: message)
+                        self.delegate?.showNetworkAlert(self, withTitle: title, withMessage: message)
                     }
                 }
             }

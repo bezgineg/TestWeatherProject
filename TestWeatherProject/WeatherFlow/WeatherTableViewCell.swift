@@ -5,7 +5,7 @@ class WeatherTableViewCell: UITableViewCell {
     
     private let cityLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .black
         label.text = "Город"
         return label
@@ -13,7 +13,7 @@ class WeatherTableViewCell: UITableViewCell {
     
     private let temperatureLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .black
         label.text = "0°C"
         return label
@@ -21,7 +21,7 @@ class WeatherTableViewCell: UITableViewCell {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .gray
         label.text = "погода"
         return label
@@ -48,13 +48,13 @@ class WeatherTableViewCell: UITableViewCell {
         addSubviews(cityLabel, temperatureLabel, descriptionLabel)
         
         let constraints = [
-            cityLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            cityLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
+            cityLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            cityLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             
-            temperatureLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            temperatureLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
+            temperatureLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            temperatureLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             
-            descriptionLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            descriptionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: temperatureLabel.leadingAnchor, constant: -15),
         ]
         

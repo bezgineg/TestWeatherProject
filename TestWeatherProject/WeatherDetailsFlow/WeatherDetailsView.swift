@@ -5,21 +5,21 @@ class WeatherDetailsView: UIView {
     
     private let temperatureLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 30, weight: .regular)
+        label.font = .systemFont(ofSize: 30, weight: .regular)
         label.textColor = .black
         return label
     }()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.font = .systemFont(ofSize: 18, weight: .medium)
         label.textColor = .black
         return label
     }()
     
     private let feelslikeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.text = "По ощущениям"
         label.textColor = .black
         return label
@@ -27,14 +27,14 @@ class WeatherDetailsView: UIView {
     
     private let feelslikeValueLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        label.font = .systemFont(ofSize: 18, weight: .regular)
         label.textColor = .black
         return label
     }()
     
     private let precipitationLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.text = "Осадки"
         label.textColor = .black
         return label
@@ -42,14 +42,14 @@ class WeatherDetailsView: UIView {
     
     private let precipitationValueLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        label.font = .systemFont(ofSize: 18, weight: .regular)
         label.textColor = .black
         return label
     }()
     
     private let humidityLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.text = "Влажность воздуха"
         label.textColor = .black
         return label
@@ -57,14 +57,14 @@ class WeatherDetailsView: UIView {
     
     private let humidityValueLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        label.font = .systemFont(ofSize: 18, weight: .regular)
         label.textColor = .black
         return label
     }()
     
     private let pressureLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.text = "Атмосферное давление"
         label.textColor = .black
         return label
@@ -72,14 +72,14 @@ class WeatherDetailsView: UIView {
     
     private let pressureValueLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        label.font = .systemFont(ofSize: 18, weight: .regular)
         label.textColor = .black
         return label
     }()
     
     private let windspeedLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.text = "Скорость ветра"
         label.textColor = .black
         return label
@@ -87,7 +87,7 @@ class WeatherDetailsView: UIView {
     
     private let windspeedValueLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        label.font = .systemFont(ofSize: 18, weight: .regular)
         label.textColor = .black
         return label
     }()
@@ -139,40 +139,40 @@ class WeatherDetailsView: UIView {
         addSubviews(temperatureLabel, descriptionLabel, feelslikeLabel, feelslikeValueLabel, precipitationLabel, precipitationValueLabel, humidityLabel, humidityValueLabel, pressureLabel, pressureValueLabel, windspeedLabel, windspeedValueLabel)
         
         let constraints = [
-            temperatureLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 25),
-            temperatureLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            temperatureLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 25),
+            temperatureLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             descriptionLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 15),
-            descriptionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            descriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            feelslikeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
+            feelslikeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
             feelslikeLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 25),
             
-            feelslikeValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
+            feelslikeValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
             feelslikeValueLabel.centerYAnchor.constraint(equalTo: feelslikeLabel.centerYAnchor),
             
-            precipitationLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
+            precipitationLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
             precipitationLabel.topAnchor.constraint(equalTo: feelslikeLabel.bottomAnchor, constant: 25),
             
-            precipitationValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
+            precipitationValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
             precipitationValueLabel.centerYAnchor.constraint(equalTo: precipitationLabel.centerYAnchor),
             
-            humidityLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
+            humidityLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
             humidityLabel.topAnchor.constraint(equalTo: precipitationLabel.bottomAnchor, constant: 25),
             
-            humidityValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
+            humidityValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
             humidityValueLabel.centerYAnchor.constraint(equalTo: humidityLabel.centerYAnchor),
             
-            pressureLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
+            pressureLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
             pressureLabel.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 25),
             
-            pressureValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
+            pressureValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
             pressureValueLabel.centerYAnchor.constraint(equalTo: pressureLabel.centerYAnchor),
             
-            windspeedLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
+            windspeedLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
             windspeedLabel.topAnchor.constraint(equalTo: pressureLabel.bottomAnchor, constant: 25),
             
-            windspeedValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
+            windspeedValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
             windspeedValueLabel.centerYAnchor.constraint(equalTo: windspeedLabel.centerYAnchor)
         ]
         

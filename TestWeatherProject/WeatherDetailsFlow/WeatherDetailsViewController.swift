@@ -22,11 +22,11 @@ class WeatherDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = weather.name
+        title = weather.name
         weatherDetailsView.configure(with: weather)
     }
     
     override func loadView() {
-        self.view = weatherDetailsView
+        view = weatherDetailsView
     }
 }

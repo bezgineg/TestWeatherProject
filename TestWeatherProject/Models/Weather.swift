@@ -1,14 +1,14 @@
 import Foundation
 
 struct Weather: Equatable {
-    var name: String = "Name"
-    var temperature: Int = 0
-    var feelsLike: Int = 0
-    var precType: Int = 0
-    var windSpeed: Double = 0.0
-    var pressureMm: Int = 0
-    var humidity: Int = 0
-    var condition: String = ""
+    var name: String
+    var temperature: Int
+    var feelsLike: Int
+    var precType: Int
+    var windSpeed: Double
+    var pressureMm: Int
+    var humidity: Int
+    var condition: String
     
     var decription: String {
         switch condition {
