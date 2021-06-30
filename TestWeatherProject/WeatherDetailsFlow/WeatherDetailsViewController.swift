@@ -24,20 +24,9 @@ class WeatherDetailsViewController: UIViewController {
 
         navigationItem.title = weather.name
         weatherDetailsView.configure(with: weather)
-        setupLayout()
     }
     
-    private func setupLayout() {
-        view.addSubviews(weatherDetailsView)
-        
-        let constraints = [
-            weatherDetailsView.topAnchor.constraint(equalTo: view.topAnchor),
-            weatherDetailsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            weatherDetailsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            weatherDetailsView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ]
-        
-        NSLayoutConstraint.activate(constraints)
+    override func loadView() {
+        self.view = weatherDetailsView
     }
-
 }

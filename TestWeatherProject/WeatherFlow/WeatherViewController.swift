@@ -36,9 +36,12 @@ class WeatherViewController: UIViewController {
         
         weatherDataProvider.delegate = self
         loadWeather()
-        setupLayout()
         setupTableView()
         setupSearchController()
+    }
+    
+    override func loadView() {
+        self.view = weatherTableView
     }
     
     private func setupSearchController() {
@@ -54,7 +57,8 @@ class WeatherViewController: UIViewController {
         if WeatherStorage.weather.isEmpty {
             WeatherStorage.weather = Array(repeating: Weather(), count: CityStorage.cities.count)
         }
-        weatherDataProvider.getWeather(cities: CityStorage.cities) { index, weather in
+        weatherDataProvider.getWeather(cities: CityStorage.cities) { [weak self] index, weather in
+            guard let self = self else { return }
             WeatherStorage.weather[index] = weather
             
             DispatchQueue.main.async {
@@ -68,19 +72,6 @@ class WeatherViewController: UIViewController {
         weatherTableView.delegate = self
         weatherTableView.dataSource = self
         weatherTableView.register(WeatherTableViewCell.self, forCellReuseIdentifier: weatherReuseID)
-    }
-    
-    private func setupLayout() {
-        view.addSubviews(weatherTableView)
-        
-        let constraints = [
-            weatherTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            weatherTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            weatherTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            weatherTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ]
-        
-        NSLayoutConstraint.activate(constraints)
     }
 }
 
@@ -127,13 +118,17 @@ extension WeatherViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let removeAction = UIContextualAction(style: .destructive, title: "Удалить") {_,_,_ in
+        let removeAction = UIContextualAction(style: .destructive, title: "Удалить") { [weak self] _,_,_ in
+            guard let self = self else { return }
             
             let city = WeatherStorage.weather[indexPath.row]
             
             if let index = WeatherStorage.weather.firstIndex(of: city) {
                 if self.isFiltering {
+                    let newCity = FilteredWeatherStorage.weather[index]
                     FilteredWeatherStorage.weather.remove(at: index)
+                    if let weatherStorageCityIndex = WeatherStorage.weather.firstIndex(of: newCity) {
+                        WeatherStorage.weather.remove(at: weatherStorageCityIndex) }
                     self.weatherTableView.performBatchUpdates {
                         self.weatherTableView.deleteRows(at: [indexPath], with: .fade)
                     }

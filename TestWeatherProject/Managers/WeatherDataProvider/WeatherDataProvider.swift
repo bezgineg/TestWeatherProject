@@ -57,7 +57,8 @@ class WeatherDataProvider {
     func getWeather(cities: [String],
                     completion: @escaping (Int, Weather) -> Void) {
         for (index, city) in cities.enumerated() {
-            getCoordinates(city: city) { result in
+            getCoordinates(city: city) {  [weak self] result in
+                guard let self = self else { return }
                 switch result {
                 
                 case .success(let location):
