@@ -1,7 +1,7 @@
 
 import UIKit
 
-class WeatherDetailsView: UIView {
+final class WeatherDetailsView: UIView {
     
     //MARK: - Private Properties
     private let temperatureLabel: UILabel = {
@@ -105,6 +105,7 @@ class WeatherDetailsView: UIView {
     }
 
     //MARK: - Public Methods
+    
     func configure(with weather: Weather) {
         temperatureLabel.text = "\(weather.temperature)°C"
         descriptionLabel.text = weather.decription
@@ -117,25 +118,38 @@ class WeatherDetailsView: UIView {
     }
     
     //MARK: - Private Methods
+    
     private func configurePrecipitation(with value: Int) -> String {
         switch value {
-        case 0: return "Без осадков"
-        case 1: return "Дождь"
-        case 2: return "Дождь со снегом"
-        case 3: return "Снег"
-        case 4: return "Град"
-        default: return ""
+        case 0:
+            return "Без осадков"
+        case 1:
+            return "Дождь"
+        case 2:
+            return "Дождь со снегом"
+        case 3:
+            return "Снег"
+        case 4:
+            return "Град"
+        default:
+            return ""
         }
     }
     
     private func setupBackgroundColor(with value: Int) {
         switch value {
-        case ..<0: backgroundColor = .blue
-        case 0..<10: backgroundColor = .gray
-        case 10..<20: backgroundColor = .cyan
-        case 20..<30: backgroundColor = .yellow
-        case 30...: backgroundColor = .orange
-        default: backgroundColor = .white
+        case ..<0:
+            backgroundColor = .blue
+        case 0..<10:
+            backgroundColor = .gray
+        case 10..<20:
+            backgroundColor = .cyan
+        case 20..<30:
+            backgroundColor = .yellow
+        case 30...:
+            backgroundColor = .orange
+        default:
+            backgroundColor = .white
         }
     }
      
@@ -179,7 +193,6 @@ class WeatherDetailsView: UIView {
             windspeedValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
             windspeedValueLabel.centerYAnchor.constraint(equalTo: windspeedLabel.centerYAnchor)
         ]
-        
         NSLayoutConstraint.activate(constraints)
     }
 }

@@ -1,7 +1,7 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController {
+final class WeatherViewController: UIViewController {
     
     //MARK: - Public Properties
     let weatherDataProvider: WeatherDataProvider
@@ -12,7 +12,9 @@ class WeatherViewController: UIViewController {
     private let searchController = UISearchController(searchResultsController: nil)
     
     private var isSearchBarEmpty: Bool {
-        guard let text = searchController.searchBar.text else { return false }
+        guard let text = searchController.searchBar.text else {
+            return false
+        }
         return text.isEmpty
     }
     
@@ -49,6 +51,7 @@ class WeatherViewController: UIViewController {
     }
     
     //MARK: - Private Methods
+    
     private func appointDelegates() {
         weatherDataProvider.delegate = self
     }
@@ -63,10 +66,10 @@ class WeatherViewController: UIViewController {
     }
     
     private func loadWeather() {
-        weatherDataProvider.getWeather(cities: CityStorage.cities) { [weak self] index, weather in
+        weatherDataProvider.getWeather(cities: CityStorage.cities) { [weak self] weather in
             guard let self = self else { return }
-            WeatherStorage.weather.append(weather)
             
+            WeatherStorage.weather.append(weather)
             DispatchQueue.main.async {
                 self.weatherTableView.reloadData()
             }
@@ -84,7 +87,6 @@ class WeatherViewController: UIViewController {
 // MARK: - UITableViewDelegate
 extension WeatherViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if isFiltering {
             let weather = FilteredWeatherStorage.weather[indexPath.row]
             let weatherDetailsViewController = WeatherDetailsViewController(weather: weather)
@@ -109,8 +111,9 @@ extension WeatherViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let weatherCell: WeatherTableViewCell = tableView.dequeueReusableCell(withIdentifier: weatherReuseID, for: indexPath) as! WeatherTableViewCell
-        
+        let weatherCell: WeatherTableViewCell = tableView.dequeueReusableCell(withIdentifier: weatherReuseID,
+                                                                              for: indexPath) as! WeatherTableViewCell
+
         if isFiltering {
             let weather = FilteredWeatherStorage.weather[indexPath.row]
             weatherCell.configure(with: weather)
@@ -122,26 +125,28 @@ extension WeatherViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let removeAction = UIContextualAction(style: .destructive, title: "Удалить") { [weak self] _,_,_ in
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let removeAction = UIContextualAction(style: .destructive,
+                                              title: "Удалить") { [weak self] _,_,_ in
             guard let self = self else { return }
             
             let city = WeatherStorage.weather[indexPath.row]
             
-            if let index = WeatherStorage.weather.firstIndex(of: city) {
-                if self.isFiltering {
-                    let newCity = FilteredWeatherStorage.weather[index]
-                    FilteredWeatherStorage.weather.remove(at: index)
-                    if let weatherStorageCityIndex = WeatherStorage.weather.firstIndex(of: newCity) {
-                        WeatherStorage.weather.remove(at: weatherStorageCityIndex) }
-                    self.weatherTableView.performBatchUpdates {
-                        self.weatherTableView.deleteRows(at: [indexPath], with: .fade)
-                    }
-                } else {
-                    WeatherStorage.weather.remove(at: index)
-                    self.weatherTableView.performBatchUpdates {
-                        self.weatherTableView.deleteRows(at: [indexPath], with: .fade)
-                    }
+            guard let index = WeatherStorage.weather.firstIndex(of: city) else { return }
+            
+            if self.isFiltering {
+                let newCity = FilteredWeatherStorage.weather[index]
+                FilteredWeatherStorage.weather.remove(at: index)
+                self.weatherTableView.performBatchUpdates {
+                    self.weatherTableView.deleteRows(at: [indexPath], with: .fade)
+                }
+                guard let newCityIndex = WeatherStorage.weather.firstIndex(of: newCity) else { return }
+                WeatherStorage.weather.remove(at: newCityIndex)
+            } else {
+                WeatherStorage.weather.remove(at: index)
+                self.weatherTableView.performBatchUpdates {
+                    self.weatherTableView.deleteRows(at: [indexPath], with: .fade)
                 }
             }
         }
@@ -152,7 +157,9 @@ extension WeatherViewController: UITableViewDataSource {
 // MARK: - UISearchResultsUpdating
 extension WeatherViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else { return }
+        guard let text = searchController.searchBar.text else {
+            return
+        }
         filterWeatherStorage(with: text)
     }
     
@@ -166,13 +173,12 @@ extension WeatherViewController: UISearchResultsUpdating {
 
 // MARK: - WeatherDataProviderDelegate
 extension WeatherViewController: WeatherDataProviderDelegate {
-    func showNetworkAlert(_ weatherDataProvider: WeatherDataProvider, withTitle title: String, withMessage message: String) {
+    func showNetworkAlert(_ weatherDataProvider: WeatherDataProvider,
+                          withTitle title: String,
+                          withMessage message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(okAction)
         navigationController?.present(alertController, animated: false, completion: nil)
     }
 }
-
-
-

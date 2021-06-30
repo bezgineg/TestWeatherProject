@@ -26,4 +26,3 @@ struct Fact: Decodable {
         case temp
     }
 }
-

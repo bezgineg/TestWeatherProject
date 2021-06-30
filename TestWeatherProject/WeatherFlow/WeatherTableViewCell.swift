@@ -1,7 +1,7 @@
 
 import UIKit
 
-class WeatherTableViewCell: UITableViewCell {
+final class WeatherTableViewCell: UITableViewCell {
     
     //MARK: - Private Properties
     private let cityLabel: UILabel = {
@@ -33,7 +33,6 @@ class WeatherTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupLayout()
-
     }
     
     required init?(coder: NSCoder) {
@@ -41,6 +40,7 @@ class WeatherTableViewCell: UITableViewCell {
     }
     
     //MARK: - Public Methods
+    
     func configure(with weather: Weather) {
         cityLabel.text = weather.name
         temperatureLabel.text = "\(weather.temperature)°C"
@@ -48,6 +48,7 @@ class WeatherTableViewCell: UITableViewCell {
     }
     
     //MARK: - Private Methods
+    
     private func setupLayout() {
         addSubviews(cityLabel, temperatureLabel, descriptionLabel)
         
@@ -61,7 +62,6 @@ class WeatherTableViewCell: UITableViewCell {
             descriptionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: temperatureLabel.leadingAnchor, constant: -15),
         ]
-        
         NSLayoutConstraint.activate(constraints)
     }
 }

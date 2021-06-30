@@ -1,7 +1,7 @@
 
 import UIKit
 
-class WeatherDetailsViewController: UIViewController {
+final class WeatherDetailsViewController: UIViewController {
     
     //MARK: - Public Properties
     let weather: Weather
@@ -26,11 +26,16 @@ class WeatherDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = weather.name
+        setupNavigationBar()
         weatherDetailsView.configure(with: weather)
     }
     
     override func loadView() {
         view = weatherDetailsView
+    }
+    
+    //MARK: - Private Methods
+    private func setupNavigationBar() {
+        title = weather.name
     }
 }
