@@ -54,12 +54,9 @@ class WeatherViewController: UIViewController {
     }
     
     private func loadWeather() {
-        if WeatherStorage.weather.isEmpty {
-            WeatherStorage.weather = Array(repeating: Weather(), count: CityStorage.cities.count)
-        }
         weatherDataProvider.getWeather(cities: CityStorage.cities) { [weak self] index, weather in
             guard let self = self else { return }
-            WeatherStorage.weather[index] = weather
+            WeatherStorage.weather.append(weather)
             
             DispatchQueue.main.async {
                 self.weatherTableView.reloadData()
