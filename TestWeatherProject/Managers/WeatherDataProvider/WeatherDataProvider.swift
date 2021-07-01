@@ -13,7 +13,7 @@ final class WeatherDataProvider {
     //MARK: - Public Properties
     weak var delegate: WeatherDataProviderDelegate?
  
-    //MARK: - Public Methods
+    //MARK: - Private Methods
     
     private func fetchWeather(lat: String,
                       lon: String,
@@ -43,9 +43,7 @@ final class WeatherDataProvider {
         }
         task.resume()
     }
-    
-    //MARK: - Private Methods
-    
+
     private func getCoordinates(city: String,
                         completion: @escaping (Result<CLLocationCoordinate2D, WeatherDataProviderError>) -> Void) {
         CLGeocoder().geocodeAddressString(city) { (placemark, error) in
@@ -61,6 +59,8 @@ final class WeatherDataProvider {
             completion(.success(location.coordinate))
         }
     }
+    
+    //MARK: - Public Methods
     
     func getWeather(cities: [String],
                     completion: @escaping (Weather) -> Void) {
